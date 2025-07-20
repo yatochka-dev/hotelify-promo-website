@@ -197,7 +197,7 @@ onChange={e => fieldApi.handleChange(e.target.value)}
                           <Label htmlFor="type">Type</Label>
                           <Select
                               value={fieldApi.state.value}
-                              onValueChange={v => fieldApi.handleChange(v)}
+                              onValueChange={v => fieldApi.handleChange(v as "Consumer" | "Business")}
                           >
                             <SelectTrigger className="w-full">
                               <SelectValue placeholder="Select type" />

@@ -22,6 +22,7 @@ export default async function saveToWaitlist(
 
         for (const [key, value] of Object.entries(json.data)) {
 
+            // @ts-ignore
             res[key] = [value.code];
         }
 
