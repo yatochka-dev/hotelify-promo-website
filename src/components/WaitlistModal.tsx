@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm, type AnyFieldApi } from "@tanstack/react-form";
+import { type AnyFieldApi } from "@tanstack/react-form";
 import { useAnimate } from "motion/react";
 
 import {
@@ -24,8 +24,7 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { TextMorph } from "~/components/ui/text-morph";
-import saveToWaitlist from "~/lib/saveToWaitlist";
-import { waitlistEntry, type WaitlistEntry } from "~/shemas";
+import { useWaitlistForm } from "~/hooks/useWaitlistForm";
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
@@ -45,46 +44,26 @@ export default function WaitlistModal() {
     two: "KeyVaro",
     three: "Waitlist!",
   });
-  const [entered, setEntered] = useState(false);
-  const [loading, setLoading] = useState(false);
 
-  // @ts-ignore - react-form types are incompatible
-  const form = useForm<WaitlistEntry>({
-    defaultValues: {
-      name: "",
-      email: "",
-      type: "Consumer",
-    },
-    validators: {
-      onChange: waitlistEntry,
-    },
-    // @ts-ignore - library types are not great
-    onSubmit: async ({ value, formApi }) => {
-      setLoading(true);
-      await saveToWaitlist(value);
-      setLoading(false);
-      formApi.reset();
-      async function run() {
-        setTitle({ one: "Thanks for", two: "Joining", three: "KeyVaro!" });
-        await animate(
-          ".field",
-          { opacity: 0, y: -20, userSelect: "none", pointerEvents: "none" },
-          { duration: 0.3, delay: (i) => i * 0.1 },
-        );
-        await animate("#heart", { opacity: 1 });
-        await animate(
-          "#heart",
-          { scale: [1, 1.2, 1] },
-          { repeat: 10, duration: 0.8, ease: "circInOut" },
-        );
-        await new Promise((resolve) => setTimeout(resolve, 3000));
-        const closeIcon = document.getElementById("close-modal-icon");
-        if (closeIcon) closeIcon.click();
-        setEntered(true);
-      }
-      void run();
-    },
-  });
+  async function playSuccessAnimation() {
+    setTitle({ one: "Thanks for", two: "Joining", three: "KeyVaro!" });
+    await animate(
+      ".field",
+      { opacity: 0, y: -20, userSelect: "none", pointerEvents: "none" },
+      { duration: 0.3, delay: (i) => i * 0.1 },
+    );
+    await animate("#heart", { opacity: 1 });
+    await animate(
+      "#heart",
+      { scale: [1, 1.2, 1] },
+      { repeat: 10, duration: 0.8, ease: "circInOut" },
+    );
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    const closeIcon = document.getElementById("close-modal-icon");
+    if (closeIcon) closeIcon.click();
+  }
+
+  const { form, loading, entered } = useWaitlistForm({ onSuccess: playSuccessAnimation });
 
   return (
     <Modal>
