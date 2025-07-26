@@ -27,7 +27,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useModal = () =>  {
+export const useModal = () => {
   const context = useContext(ModalContext);
   if (!context) {
     throw new Error("useModal must be used within a ModalProvider");
@@ -104,7 +104,7 @@ export const ModalBody = ({
           <motion.div
             ref={modalRef}
             className={cn(
-              "relative z-50 flex max-h-[90%] min-h-[50%] flex-1 flex-col overflow-hidden border border-transparent bg-white md:max-w-[40%] md:rounded-2xl dark:border-neutral-800 dark:bg-neutral-950",
+              "relative z-50 flex max-h-[90%] min-h-[50%] flex-1 cursor-pointer flex-col overflow-hidden border border-transparent bg-white md:max-w-[40%] md:rounded-2xl dark:border-neutral-800 dark:bg-neutral-950",
               className,
             )}
             initial={{
@@ -228,7 +228,11 @@ export const useOutsideClick = (
   useEffect(() => {
     const listener = (event: any) => {
       // DO NOTHING if the element being clicked is the target element or their children
-      if (!ref.current || ref.current.contains(event.target) || ref.current.classList.contains("relative")) {
+      if (
+        !ref.current ||
+        ref.current.contains(event.target) ||
+        ref.current.classList.contains("relative")
+      ) {
         return;
       }
       callback(event);

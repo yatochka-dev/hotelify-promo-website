@@ -38,7 +38,7 @@ export default function HomePage() {
           Unlock your next stay with a smartphone.
         </p>
         <div className="z-50 mt-8 flex w-full flex-col justify-center gap-4 md:flex-row">
-          <WaitlistModal />
+          <WaitlistModal wf={false} />
           <Button
             variant="outline"
             size="lg"

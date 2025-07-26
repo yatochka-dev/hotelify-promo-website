@@ -25,19 +25,22 @@ import {
 } from "~/components/ui/select";
 import { TextMorph } from "~/components/ui/text-morph";
 import { useWaitlistForm } from "~/hooks/useWaitlistForm";
+import { cn } from "~/lib/utils";
 
-function FieldInfo({ field }: { field: AnyFieldApi }) {
+export function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
-    <>
+    <span>
       {field.state.meta.isTouched && !field.state.meta.isValid ? (
-        <em>{field.state.meta.errors.join(", ")}</em>
+        <em className={"text-destructive"}>
+          {field.state.meta.errors.map((e) => e.message).join(", ")}
+        </em>
       ) : null}
       {field.state.meta.isValidating ? "Validating..." : null}
-    </>
+    </span>
   );
 }
 
-export default function WaitlistModal() {
+export default function WaitlistModal({ wf }: { wf: boolean }) {
   const [scope, animate] = useAnimate();
   const [title, setTitle] = useState({
     one: "Sign up for",
@@ -78,7 +81,10 @@ export default function WaitlistModal() {
           className={buttonVariants({
             variant: "destructive",
             size: "lg",
-            className: "bg-foreground! text-background! cat cursor-pointer",
+            className: cn(
+              "bg-foreground! text-background! cat cursor-pointer",
+              wf && "w-full",
+            ),
           })}
         >
           Enter the Waitlist

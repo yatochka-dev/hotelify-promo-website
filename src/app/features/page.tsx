@@ -21,6 +21,7 @@ import { Button } from "~/components/ui/button";
 import { TextMorph } from "~/components/ui/text-morph";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useIsMobile } from "~/hooks/useMobile";
 
 const features = [
   {
@@ -80,6 +81,7 @@ const features = [
 ];
 
 export default function FeaturesSection() {
+  const isMobile = useIsMobile();
   const p = [
     "Continue ->",
     "Go to the next page ->",
@@ -101,14 +103,14 @@ export default function FeaturesSection() {
   }
 
   return (
-    <section className="bg-background relative flex h-screen max-h-screen items-center overflow-hidden">
-      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6">
+    <section className="bg-background relative flex items-center">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-3 py-16 pb-30 md:px-6 lg:py-30">
         <motion.div className="text-center">
-          <h1 className="text-foreground mb-6 flex items-center justify-center gap-2 text-center text-4xl font-bold tracking-tight md:text-6xl">
-            Powerful Features{" "}
+          <h1 className="text-foreground md:text-6x md:blockl mb-6 hidden items-center justify-center gap-2 text-center text-2xl font-bold tracking-tight sm:text-3xl lg:flex">
+            Powerful Features that
             <span
               className={
-                "rounded-md border border-gray-200 bg-gray-100 px-1 py-0.5 dark:border-neutral-700 dark:bg-neutral-800"
+                "inline-flex rounded-md border border-gray-200 bg-gray-100 px-1 py-0.5 dark:border-neutral-700 dark:bg-neutral-800"
               }
             >
               <ViewTransition name={"title"}>
@@ -117,7 +119,14 @@ export default function FeaturesSection() {
             </span>
             offers.
           </h1>
-          <p className="text-foreground/70 mx-auto max-w-3xl text-xl font-light">
+          <h1
+            className={
+              "text-foreground md:text-6x md:blockl mb-6 flex items-center justify-center gap-2 text-center text-3xl font-bold tracking-tight md:hidden"
+            }
+          >
+            Powerful Features that span Offers
+          </h1>
+          <p className="text-foreground/70 mx-auto max-w-3xl text-lg font-light md:text-xl">
             Everything you need to create exceptional guest experiences while
             optimizing operations
           </p>
@@ -169,10 +178,14 @@ export default function FeaturesSection() {
 
       <div
         className={
-          "text-foreground absolute right-10 bottom-10 text-lg font-semibold"
+          "text-foreground fixed right-10 bottom-10 text-lg font-semibold"
         }
       >
-        <Button variant={"ghost"} asChild onClick={handleContinueClick}>
+        <Button
+          variant={isMobile ? "default" : "ghost"}
+          asChild
+          onClick={handleContinueClick}
+        >
           <Link href="/waitlist">
             <TextMorph children={p[c] ?? "Continue ->"} />
           </Link>

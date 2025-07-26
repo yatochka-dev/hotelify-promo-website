@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { unstable_ViewTransition as ViewTransition } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "~/components/ui/button";
 
 const problems = [
   {
@@ -67,8 +68,18 @@ export default function ProblemSolutionSection() {
   }
 
   return (
-    <section className="bg-background relative flex h-screen items-center overflow-hidden">
-      <div className="mx-auto grid scale-90 items-center gap-40 px-6 lg:grid-cols-2">
+    <section className="bg-background relative flex items-center overflow-hidden lg:h-screen">
+      <Button
+        variant={"default"}
+        size={"lg"}
+        className={
+          "fixed right-4 bottom-4 z-[100] flex cursor-pointer lg:hidden"
+        }
+        onClick={handleArrowClick}
+      >
+        Continue Exploring {"->"}
+      </Button>
+      <div className="mx-auto grid scale-90 items-center gap-16 px-3 lg:grid-cols-2 lg:gap-40 lg:px-6">
         {/* Problems */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}

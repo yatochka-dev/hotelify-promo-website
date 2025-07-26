@@ -1,4 +1,11 @@
+import { TextShimmerWave } from "~/components/ui/text-shimmer-wave";
+
 export default function RootLoading() {
-  //   @TODO ADD TEXT SHIMMER WAVE
-  return <></>;
+  return (
+    <div className={"flex h-screen w-screen items-center justify-center"}>
+      <TextShimmerWave className="font-mono text-sm" duration={1}>
+        Loading...
+      </TextShimmerWave>
+    </div>
+  );
 }
