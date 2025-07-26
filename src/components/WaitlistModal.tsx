@@ -4,13 +4,6 @@ import { useState } from "react";
 import { type AnyFieldApi } from "@tanstack/react-form";
 import { useAnimate } from "motion/react";
 
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalTrigger,
-} from "~/components/ui/animated-modal";
 import { Button, buttonVariants } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
@@ -26,6 +19,12 @@ import {
 import { TextMorph } from "~/components/ui/text-morph";
 import { useWaitlistForm } from "~/hooks/useWaitlistForm";
 import { cn } from "~/lib/utils";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTitle,
+} from "~/components/ui/dialog";
 
 export function FieldInfo({ field }: { field: AnyFieldApi }) {
   return (
@@ -47,6 +46,7 @@ export default function WaitlistModal({
   wf: boolean;
   small?: boolean;
 }) {
+  const [open, setOpen] = useState(false);
   const [scope, animate] = useAnimate();
   const [title, setTitle] = useState({
     one: "Sign up for",
@@ -65,11 +65,9 @@ export default function WaitlistModal({
     await animate(
       "#heart",
       { scale: [1, 1.2, 1] },
-      { repeat: 10, duration: 0.8, ease: "circInOut" },
+      { repeat: 7, duration: 0.8, ease: "circInOut" },
     );
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    const closeIcon = document.getElementById("close-modal-icon");
-    if (closeIcon) closeIcon.click();
+    setOpen(false);
   }
 
   const { form, loading, entered } = useWaitlistForm({
@@ -77,7 +75,7 @@ export default function WaitlistModal({
   });
 
   return (
-    <Modal>
+    <>
       {entered ? (
         <Button
           disabled
@@ -88,7 +86,7 @@ export default function WaitlistModal({
           Thank you!
         </Button>
       ) : (
-        <ModalTrigger
+        <Button
           className={buttonVariants({
             variant: "destructive",
             size: small ? "sm" : "lg",
@@ -97,19 +95,26 @@ export default function WaitlistModal({
               wf && "w-full",
             ),
           })}
+          variant={"destructive"}
+          size={small ? "sm" : "lg"}
+          onClick={() => setOpen(true)}
+          disabled={loading || entered}
         >
           Enter the Waitlist
-        </ModalTrigger>
+        </Button>
       )}
-      <ModalBody className="mx-8 min-w-[80vw] md:min-w-[45vw]">
-        <ModalContent>
-          <h4 className="mx-auto mb-8 hidden items-center gap-2 text-center text-lg font-bold text-neutral-600 md:inline-flex md:text-2xl dark:text-neutral-100">
-            <TextMorph>{title.one}</TextMorph>{" "}
-            <span className="rounded-md border border-gray-200 bg-gray-100 px-1 py-0.5 dark:border-neutral-700 dark:bg-neutral-800">
-              <TextMorph>{title.two}</TextMorph>
-            </span>{" "}
-            <TextMorph>{title.three}</TextMorph>
-          </h4>
+
+      <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
+        <DialogContent className={"mx-8 min-w-[80vw] md:min-w-[45vw]"}>
+          <DialogTitle className={"text-center"}>
+            <h4 className="mx-auto mb-8 hidden items-center gap-2 text-center text-lg font-bold text-neutral-600 md:inline-flex md:text-2xl dark:text-neutral-100">
+              <TextMorph>{title.one}</TextMorph>{" "}
+              <span className="rounded-md border border-gray-200 bg-gray-100 px-1 py-0.5 dark:border-neutral-700 dark:bg-neutral-800">
+                <TextMorph>{title.two}</TextMorph>
+              </span>{" "}
+              <TextMorph>{title.three}</TextMorph>
+            </h4>
+          </DialogTitle>
           <h4
             className={
               "my-2 inline gap-2 text-center text-[17px] font-bold text-neutral-600 md:hidden md:text-2xl dark:text-neutral-100"
@@ -187,29 +192,32 @@ export default function WaitlistModal({
               )}
             </form.Field>
           </form>
-        </ModalContent>
-        <ModalFooter className="gap-4">
-          <Button
-            type="button"
-            className="w-28 rounded-md border border-gray-300 bg-gray-200 px-2 py-1 text-sm text-black dark:border-black dark:bg-black dark:text-white"
-            data-close-modal
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={form.handleSubmit}
-            disabled={
-              !form.state.canSubmit ||
-              loading ||
-              form.state.isSubmitted ||
-              entered
-            }
-            className="w-28 rounded-md border border-black bg-black px-2 py-1 text-sm text-white dark:bg-white dark:text-black"
-          >
-            {loading ? "Submitting..." : entered ? "Thank you!" : "Let's go!"}
-          </Button>
-        </ModalFooter>
-      </ModalBody>
-    </Modal>
+          <DialogFooter className="gap-4">
+            <Button
+              type="button"
+              className="w-28 rounded-md border border-gray-300 bg-gray-200 px-2 py-1 text-sm text-black dark:border-black dark:bg-black dark:text-white"
+              data-close-modal
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={form.handleSubmit}
+              disabled={
+                !form.state.canSubmit ||
+                loading ||
+                form.state.isSubmitted ||
+                entered
+              }
+              className="w-28 rounded-md border border-black bg-black px-2 py-1 text-sm text-white dark:bg-white dark:text-black"
+            >
+              {loading ? "Submitting..." : entered ? "Thank you!" : "Let's go!"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
