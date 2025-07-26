@@ -1,6 +1,7 @@
 "use server";
 
 import { env } from "~/env";
+import { z } from "zod/v4";
 
 export async function getCurrentWaitlistCount() {
   const res = await fetch(
@@ -13,5 +14,14 @@ export async function getCurrentWaitlistCount() {
   );
 
   const data = (await res.json()) as { items: any[] };
-  return data.items.length;
+  const count = data.items.length;
+  const schema = z.number();
+
+  const { data: d, success } = schema.safeParse(count);
+
+  if (!success) {
+    return 156;
+  }
+
+  return d;
 }

@@ -20,6 +20,7 @@ import WaitlistModal, { FieldInfo } from "~/components/WaitlistModal";
 import { Label } from "~/components/ui/label";
 import { Button } from "~/components/ui/button";
 import { TextMorph } from "~/components/ui/text-morph";
+import { useRouter } from "next/navigation";
 
 const benefits = [
   {
@@ -41,7 +42,7 @@ const benefits = [
 ];
 
 export default function WaitlistSection() {
-  const { form, loading, entered } = useWaitlistForm();
+  const router = useRouter();
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -62,6 +63,13 @@ export default function WaitlistSection() {
       { number: "Q1 2026", label: "Expected Launch" },
     ];
   }, [count]);
+
+  const { form, loading, entered } = useWaitlistForm({
+    onSuccess: () => {
+      router.refresh();
+    },
+  });
+
   return (
     <section className="bg-background relative flex items-center overflow-scroll py-10 sm:h-screen sm:py-0 md:overflow-hidden">
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-16 px-6 lg:grid-cols-2">
