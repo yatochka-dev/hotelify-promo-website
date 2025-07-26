@@ -124,8 +124,6 @@
     @apply bg-background text-foreground;
   }
 
-
-
   /*[data-support-yes],*/
   /*[data-support-no] {*/
   /*  @apply hidden;*/
@@ -159,4 +157,3 @@
   /*  }*/
   /*}*/
 }
-
