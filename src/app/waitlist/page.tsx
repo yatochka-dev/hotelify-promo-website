@@ -240,6 +240,7 @@ export default function WaitlistSection() {
                     </form.Field>
                     <Button
                       type="submit"
+                      className={"my-3 w-full"}
                       disabled={
                         form.state.isSubmitted ||
                         loading ||
@@ -247,9 +248,7 @@ export default function WaitlistSection() {
                       }
                     >
                       <TextMorph>
-                        {form.state.isSubmitted
-                          ? "Thank you!"
-                          : "Join Waitlist"}
+                        {entered ? "Thank you!" : "Join Waitlist"}
                       </TextMorph>
                     </Button>
                   </form>
