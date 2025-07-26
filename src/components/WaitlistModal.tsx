@@ -63,12 +63,14 @@ export default function WaitlistModal() {
     if (closeIcon) closeIcon.click();
   }
 
-  const { form, loading, entered } = useWaitlistForm({ onSuccess: playSuccessAnimation });
+  const { form, loading, entered } = useWaitlistForm({
+    onSuccess: playSuccessAnimation,
+  });
 
   return (
     <Modal>
       {entered ? (
-        <Button disabled variant="default" size="lg">
+        <Button disabled variant="default" size="lg" className={"cat"}>
           Thank you!
         </Button>
       ) : (
@@ -76,7 +78,7 @@ export default function WaitlistModal() {
           className={buttonVariants({
             variant: "destructive",
             size: "lg",
-            className: "bg-foreground! text-background!",
+            className: "bg-foreground! text-background! cat cursor-pointer",
           })}
         >
           Enter the Waitlist
@@ -84,7 +86,7 @@ export default function WaitlistModal() {
       )}
       <ModalBody className="mx-8 min-w-[80vw] md:min-w-[45vw]">
         <ModalContent>
-          <h4 className="mx-auto mb-8 inline-flex items-center gap-2 text-center text-lg font-bold text-neutral-600 dark:text-neutral-100 md:text-2xl">
+          <h4 className="mx-auto mb-8 inline-flex items-center gap-2 text-center text-lg font-bold text-neutral-600 md:text-2xl dark:text-neutral-100">
             <TextMorph>{title.one}</TextMorph>{" "}
             <span className="rounded-md border border-gray-200 bg-gray-100 px-1 py-0.5 dark:border-neutral-700 dark:bg-neutral-800">
               <TextMorph>{title.two}</TextMorph>
@@ -172,7 +174,12 @@ export default function WaitlistModal() {
           </Button>
           <Button
             onClick={form.handleSubmit}
-            disabled={!form.state.canSubmit || loading || form.state.isSubmitted || entered}
+            disabled={
+              !form.state.canSubmit ||
+              loading ||
+              form.state.isSubmitted ||
+              entered
+            }
             className="w-28 rounded-md border border-black bg-black px-2 py-1 text-sm text-white dark:bg-white dark:text-black"
           >
             {loading ? "Submitting..." : entered ? "Thank you!" : "Let's go!"}
@@ -182,4 +189,3 @@ export default function WaitlistModal() {
     </Modal>
   );
 }
-

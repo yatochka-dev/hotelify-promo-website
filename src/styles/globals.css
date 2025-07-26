@@ -123,4 +123,39 @@
   body {
     @apply bg-background text-foreground;
   }
+
+
+  /*[data-support-yes],*/
+  /*[data-support-no] {*/
+  /*  @apply hidden;*/
+  /*}*/
+
+  /*@supports (view-transition-name: test) {*/
+  /*  [data-support] [data-support-yes] {*/
+  /*    @apply inline;*/
+  /*  }*/
+  /*  [data-support] [data-support-no] {*/
+  /*    @apply hidden;*/
+  /*  }*/
+  /*}*/
+
+  /*@supports not (view-transition-name: test) {*/
+  /*  [data-support] [data-support-yes] {*/
+  /*    @apply hidden;*/
+  /*  }*/
+  /*  [data-support] [data-support-no] {*/
+  /*    @apply inline;*/
+  /*  }*/
+  /*}*/
+
+  /*!* Safari *!*/
+  /*@supports (-webkit-hyphens: none) and (not (-moz-appearance: none)) {*/
+  /*  [data-support] [data-support-yes] {*/
+  /*    @apply hidden;*/
+  /*  }*/
+  /*  [data-support] [data-support-no] {*/
+  /*    @apply inline;*/
+  /*  }*/
+  /*}*/
 }
+
