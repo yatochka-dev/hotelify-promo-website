@@ -18,6 +18,8 @@ import { getCurrentWaitlistCount } from "~/app/_actions";
 import { useWaitlistForm } from "~/hooks/useWaitlistForm";
 import WaitlistModal, { FieldInfo } from "~/components/WaitlistModal";
 import { Label } from "~/components/ui/label";
+import { Button } from "~/components/ui/button";
+import { TextMorph } from "~/components/ui/text-morph";
 
 const benefits = [
   {
@@ -236,6 +238,20 @@ export default function WaitlistSection() {
                         </div>
                       )}
                     </form.Field>
+                    <Button
+                      type="submit"
+                      disabled={
+                        form.state.isSubmitted ||
+                        loading ||
+                        form.state.isSubmitting
+                      }
+                    >
+                      <TextMorph>
+                        {form.state.isSubmitted
+                          ? "Thank you!"
+                          : "Join Waitlist"}
+                      </TextMorph>
+                    </Button>
                   </form>
 
                   <motion.p
