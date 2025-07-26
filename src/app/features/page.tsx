@@ -12,7 +12,15 @@ import {
   Bell,
   BarChart3,
 } from "lucide-react";
-import { unstable_ViewTransition as ViewTransition } from "react";
+import {
+  unstable_ViewTransition as ViewTransition,
+  useEffect,
+  useState,
+} from "react";
+import { Button } from "~/components/ui/button";
+import { TextMorph } from "~/components/ui/text-morph";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const features = [
   {
@@ -72,6 +80,26 @@ const features = [
 ];
 
 export default function FeaturesSection() {
+  const p = [
+    "Continue ->",
+    "Go to the next page ->",
+    "Explore ->",
+    "Join the waitlist ->",
+  ];
+  const [c, setContinue] = useState<number>(0);
+
+  useEffect(() => {
+    setInterval(() => {
+      setContinue((d) => (d + 1) % p.length);
+    }, 3000);
+  }, []);
+
+  const router = useRouter();
+  function handleContinueClick(e: any) {
+    e.preventDefault();
+    router.push("/waitlist");
+  }
+
   return (
     <section className="bg-background relative flex h-screen max-h-screen items-center overflow-hidden">
       <div className="mx-auto flex max-w-7xl flex-col gap-10 px-6">
@@ -137,6 +165,18 @@ export default function FeaturesSection() {
         {/*    </span>*/}
         {/*  </div>*/}
         {/*</motion.div>*/}
+      </div>
+
+      <div
+        className={
+          "text-foreground absolute right-10 bottom-10 text-lg font-semibold"
+        }
+      >
+        <Button variant={"ghost"} asChild onClick={handleContinueClick}>
+          <Link href="/waitlist">
+            <TextMorph children={p[c] ?? "Continue ->"} />
+          </Link>
+        </Button>
       </div>
 
       {/* Floating Geometric Elements */}

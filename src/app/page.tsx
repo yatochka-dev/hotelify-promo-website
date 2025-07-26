@@ -28,7 +28,7 @@ export default function HomePage() {
     >
       <Spotlight />
 
-      <div className="z-50 mx-auto max-w-7xl p-4 pt-20 md:pt-0">
+      <div className="z-50 mx-auto flex h-screen max-w-7xl -translate-y-[5%] flex-col items-center justify-center p-4 pt-20 md:pt-0">
         <ViewTransition name={"title"}>
           <h1 className="bg-opacity-50 bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text text-center text-6xl font-bold text-transparent md:text-9xl">
             KeyVaro
@@ -37,7 +37,7 @@ export default function HomePage() {
         <p className="mx-auto mt-4 max-w-lg text-center text-xl font-normal text-neutral-300">
           Unlock your next stay with a smartphone.
         </p>
-        <div className="z-50 mt-8 flex w-full justify-center gap-4">
+        <div className="z-50 mt-8 flex w-full flex-col justify-center gap-4 md:flex-row">
           <WaitlistModal />
           <Button
             variant="outline"

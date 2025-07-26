@@ -48,7 +48,7 @@ export const Spotlight = ({
           repeatType: "reverse",
           ease: "easeInOut",
         }}
-        className="pointer-events-none absolute top-0 left-0 z-40 h-screen w-screen"
+        className="pointer-events-none absolute top-0 left-0 z-40 hidden h-screen w-screen md:block"
       >
         <div
           style={{
