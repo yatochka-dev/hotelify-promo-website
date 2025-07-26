@@ -103,12 +103,19 @@ export default function WaitlistModal({
       )}
       <ModalBody className="mx-8 min-w-[80vw] md:min-w-[45vw]">
         <ModalContent>
-          <h4 className="mx-auto mb-8 inline-flex items-center gap-2 text-center text-lg font-bold text-neutral-600 md:text-2xl dark:text-neutral-100">
+          <h4 className="mx-auto mb-8 hidden items-center gap-2 text-center text-lg font-bold text-neutral-600 md:inline-flex md:text-2xl dark:text-neutral-100">
             <TextMorph>{title.one}</TextMorph>{" "}
             <span className="rounded-md border border-gray-200 bg-gray-100 px-1 py-0.5 dark:border-neutral-700 dark:bg-neutral-800">
               <TextMorph>{title.two}</TextMorph>
             </span>{" "}
             <TextMorph>{title.three}</TextMorph>
+          </h4>
+          <h4
+            className={
+              "my-2 inline gap-2 text-center text-[17px] font-bold text-neutral-600 md:hidden md:text-2xl dark:text-neutral-100"
+            }
+          >
+            <TextMorph>{`${title.one} ${title.two} ${title.three}`}</TextMorph>
           </h4>
           <form
             className="space-y-4"

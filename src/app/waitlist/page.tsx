@@ -21,6 +21,7 @@ import { Label } from "~/components/ui/label";
 import { Button } from "~/components/ui/button";
 import { TextMorph } from "~/components/ui/text-morph";
 import { useRouter } from "next/navigation";
+import { SlidingNumber } from "~/components/ui/sliding-number";
 
 const benefits = [
   {
@@ -56,10 +57,11 @@ export default function WaitlistSection() {
   const stats = useMemo(() => {
     return [
       {
-        number: `${count}+`,
-        label: " Waitlist Entries",
+        number: count,
+        label: "Waitlist Entries",
+        animate: true,
       },
-      { number: "50+", label: "Countries Interested" },
+      { number: 50, label: "Countries Interested", animate: true },
       { number: "Q1 2026", label: "Expected Launch" },
     ];
   }, [count]);
@@ -130,16 +132,25 @@ export default function WaitlistSection() {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="grid grid-cols-3 gap-6"
           >
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-foreground mb-1 font-mono text-2xl font-bold md:text-3xl">
-                  {stat.number}
+            {stats.map((stat, index) => {
+              return (
+                <div
+                  key={index}
+                  className="flex flex-col items-center justify-center text-center"
+                >
+                  <div className="text-foreground mb-1 font-mono text-2xl font-bold md:text-3xl">
+                    {!!stat.animate ? (
+                      <SlidingNumber value={stat.number} />
+                    ) : (
+                      stat.number
+                    )}
+                  </div>
+                  <div className="text-foreground/60 text-xs font-medium tracking-widest uppercase">
+                    {stat.label}
+                  </div>
                 </div>
-                <div className="text-foreground/60 text-xs font-medium tracking-widest uppercase">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </motion.div>
         </motion.div>
 
