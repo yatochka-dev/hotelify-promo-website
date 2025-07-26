@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 import type { ReactNode } from "react";
+import Header from "~/components/Header";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://keyvaro.com"),
@@ -32,7 +33,10 @@ export default async function RootLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en" className={`${geist.variable} dark`}>
-      <body>{children}</body>
+      <body className={"lg:max-h-screen!"}>
+        {<Header />}
+        {children}
+      </body>
     </html>
   );
 }

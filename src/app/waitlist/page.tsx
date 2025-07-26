@@ -42,15 +42,7 @@ const benefits = [
 
 export default function WaitlistSection() {
   const { form, loading, entered } = useWaitlistForm();
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [count, setCount] = useState(0);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Simulate form submission
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
-  };
 
   useEffect(() => {
     async function fetchCount() {
@@ -155,7 +147,7 @@ export default function WaitlistSection() {
         >
           <div className="border-foreground/20 bg-background/50 rounded-lg border p-8 backdrop-blur-sm">
             <AnimatePresence mode="wait">
-              {!isSubmitted ? (
+              {!entered ? (
                 <motion.div
                   key="form"
                   initial={{ opacity: 1 }}
@@ -244,7 +236,8 @@ export default function WaitlistSection() {
                       disabled={
                         form.state.isSubmitted ||
                         loading ||
-                        form.state.isSubmitting
+                        form.state.isSubmitting ||
+                        entered
                       }
                     >
                       <TextMorph>
@@ -278,13 +271,9 @@ export default function WaitlistSection() {
                     You're In!
                   </h3>
                   <p className="text-foreground/70 mb-4">
-                    Welcome to the Hotelify waitlist. We'll notify you as soon
-                    as we launch.
+                    Welcome to the KeyVaro waitlist. We'll notify you as soon as
+                    we launch.
                   </p>
-                  <div className="text-foreground/60 text-sm">
-                    Position #{Math.floor(Math.random() * 1000) + 2500} on the
-                    waitlist
-                  </div>
                 </motion.div>
               )}
             </AnimatePresence>

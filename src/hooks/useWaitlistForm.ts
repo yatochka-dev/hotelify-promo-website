@@ -2,11 +2,30 @@ import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
 import saveToWaitlist from "~/lib/saveToWaitlist";
 import { waitlistEntry, type WaitlistEntry } from "~/shemas";
+import { create } from "zustand/react";
+import { persist } from "zustand/middleware";
 
-export function useWaitlistForm(options: { onSuccess?: () => Promise<void> | void } = {}) {
+type WaitlistState = {
+  entered: boolean;
+  enter: () => void;
+};
+
+const useWaitlistEntered = create<WaitlistState>()(
+  persist(
+    (set) => ({
+      entered: false,
+      enter: () => set({ entered: true }),
+    }),
+    { name: "entered-the-waitlist" },
+  ),
+);
+
+export function useWaitlistForm(
+  options: { onSuccess?: () => Promise<void> | void } = {},
+) {
   const { onSuccess } = options;
   const [loading, setLoading] = useState(false);
-  const [entered, setEntered] = useState(false);
+  const { entered, enter } = useWaitlistEntered();
 
   // @ts-ignore - react-form types are incompatible
   const form = useForm<WaitlistEntry>({
@@ -24,7 +43,7 @@ export function useWaitlistForm(options: { onSuccess?: () => Promise<void> | voi
       setLoading(false);
       if (!error) {
         formApi.reset();
-        setEntered(true);
+        enter();
         if (onSuccess) await onSuccess();
       }
     },

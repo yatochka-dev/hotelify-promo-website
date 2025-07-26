@@ -3,13 +3,11 @@ import { Spotlight } from "~/components/ui/spotlight-new";
 import { Button } from "~/components/ui/button";
 import WaitlistModal from "~/components/WaitlistModal";
 import Link from "next/link";
-import { useAnimate } from "motion/react";
 import { useRouter } from "next/navigation";
 
 import { unstable_ViewTransition as ViewTransition } from "react";
 
 export default function HomePage() {
-  const [scope, animate] = useAnimate();
   const router = useRouter();
   const explore = async (e: any) => {
     e.preventDefault();
@@ -22,10 +20,7 @@ export default function HomePage() {
     router.push("/ps");
   };
   return (
-    <main
-      ref={scope}
-      className="bg-grid-white/[0.02] relative flex h-screen w-full overflow-hidden rounded-md bg-black/[0.96] antialiased md:items-center md:justify-center"
-    >
+    <main className="bg-grid-white/[0.02] h-[100dvh - 65px]! relative flex w-full overflow-hidden rounded-md bg-black/[0.96] antialiased md:items-center md:justify-center">
       <Spotlight />
 
       <div className="z-50 mx-auto flex h-screen max-w-7xl -translate-y-[5%] flex-col items-center justify-center p-4 pt-20 md:pt-0">

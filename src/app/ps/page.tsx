@@ -68,7 +68,7 @@ export default function ProblemSolutionSection() {
   }
 
   return (
-    <section className="bg-background relative flex items-center overflow-x-hidden overflow-y-scroll lg:h-screen">
+    <section className="bg-background lg:h-[100dvh - 65px] relative flex items-center overflow-x-hidden">
       <Button
         variant={"default"}
         size={"lg"}

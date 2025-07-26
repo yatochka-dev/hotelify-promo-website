@@ -40,7 +40,13 @@ export function FieldInfo({ field }: { field: AnyFieldApi }) {
   );
 }
 
-export default function WaitlistModal({ wf }: { wf: boolean }) {
+export default function WaitlistModal({
+  wf,
+  small = false,
+}: {
+  wf: boolean;
+  small?: boolean;
+}) {
   const [scope, animate] = useAnimate();
   const [title, setTitle] = useState({
     one: "Sign up for",
@@ -73,14 +79,19 @@ export default function WaitlistModal({ wf }: { wf: boolean }) {
   return (
     <Modal>
       {entered ? (
-        <Button disabled variant="default" size="lg" className={"cat"}>
+        <Button
+          disabled
+          variant="default"
+          size={small ? "sm" : "lg"}
+          className={"cat"}
+        >
           Thank you!
         </Button>
       ) : (
         <ModalTrigger
           className={buttonVariants({
             variant: "destructive",
-            size: "lg",
+            size: small ? "sm" : "lg",
             className: cn(
               "bg-foreground! text-background! cat cursor-pointer",
               wf && "w-full",
