@@ -42,14 +42,14 @@ const benefits = [
 ];
 
 export default function WaitlistSection() {
+  async function fetchCount() {
+    const c = await getCurrentWaitlistCount();
+    setCount(c);
+  }
   const router = useRouter();
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    async function fetchCount() {
-      const c = await getCurrentWaitlistCount();
-      setCount(c);
-    }
     fetchCount();
   }, []);
 
@@ -65,8 +65,8 @@ export default function WaitlistSection() {
   }, [count]);
 
   const { form, loading, entered } = useWaitlistForm({
-    onSuccess: () => {
-      router.refresh();
+    onSuccess: async () => {
+      await fetchCount();
     },
   });
 
