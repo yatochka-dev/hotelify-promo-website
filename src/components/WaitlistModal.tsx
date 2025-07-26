@@ -192,7 +192,7 @@ export default function WaitlistModal({
               )}
             </form.Field>
           </form>
-          <DialogFooter className="gap-4">
+          <DialogFooter className="flex flex-row! gap-4">
             <Button
               type="button"
               className="w-28 rounded-md border border-gray-300 bg-gray-200 px-2 py-1 text-sm text-black dark:border-black dark:bg-black dark:text-white"
