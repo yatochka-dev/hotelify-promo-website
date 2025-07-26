@@ -68,7 +68,7 @@ export default function ProblemSolutionSection() {
   }
 
   return (
-    <section className="bg-background relative flex items-center overflow-hidden lg:h-screen">
+    <section className="bg-background relative flex items-center overflow-x-hidden overflow-y-scroll lg:h-screen">
       <Button
         variant={"default"}
         size={"lg"}
@@ -106,7 +106,7 @@ export default function ProblemSolutionSection() {
                   delay: index * 0.2,
                   type: "spring",
                 }}
-                className="group border-foreground/20 hover:border-foreground/40 bg-background/50 rounded-lg border p-6 backdrop-blur-sm transition-all duration-300"
+                className="group border-foreground/20 hover:border-foreground/40 bg-background/50 rounded-lg border p-3 backdrop-blur-sm transition-all duration-300 md:p-6"
               >
                 <div className="flex items-start gap-4">
                   <div className="border-foreground/30 group-hover:border-foreground/60 rounded-lg border p-2 transition-colors">
@@ -226,7 +226,7 @@ export default function ProblemSolutionSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2, type: "spring" }}
-            className="border-foreground bg-foreground/5 mt-10 rounded-lg border-2 p-6"
+            className="border-foreground bg-foreground/5 mt-10 rounded-lg border-2 p-4 md:p-6"
           >
             <h3 className="text-foreground mb-3 text-xl font-semibold">
               The Result

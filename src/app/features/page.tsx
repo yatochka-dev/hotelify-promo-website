@@ -22,6 +22,7 @@ import { TextMorph } from "~/components/ui/text-morph";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useIsMobile } from "~/hooks/useMobile";
+import { cn } from "~/lib/utils";
 
 const features = [
   {
@@ -177,9 +178,10 @@ export default function FeaturesSection() {
       </div>
 
       <div
-        className={
-          "text-foreground fixed right-10 bottom-10 text-lg font-semibold"
-        }
+        className={cn(
+          "text-foreground right-10 bottom-10 text-lg font-semibold",
+          isMobile ? "fixed" : "absolute",
+        )}
       >
         <Button
           variant={isMobile ? "default" : "ghost"}

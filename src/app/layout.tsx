@@ -30,7 +30,6 @@ const geist = Geist({
 export default async function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
   return (
     <html lang="en" className={`${geist.variable} dark`}>
       <body>{children}</body>
