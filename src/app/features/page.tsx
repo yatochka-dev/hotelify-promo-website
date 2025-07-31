@@ -104,7 +104,7 @@ export default function FeaturesSection() {
   }
 
   return (
-    <section className="bg-background relative flex items-center">
+    <section className="bg-background relative flex items-center overflow-x-hidden">
       <div className="mx-auto flex max-w-7xl flex-col gap-10 px-3 py-16 pb-30 md:px-6 lg:py-30">
         <motion.div className="text-center">
           <h1 className="text-foreground md:text-6x md:blockl mb-6 hidden items-center justify-center gap-2 text-center text-2xl font-bold tracking-tight sm:text-3xl lg:flex">
