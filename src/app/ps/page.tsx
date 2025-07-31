@@ -9,7 +9,7 @@ import {
   Users,
   ArrowRight,
 } from "lucide-react";
-import { unstable_ViewTransition as ViewTransition } from "react";
+import React, { unstable_ViewTransition as ViewTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "~/components/ui/button";
 
@@ -68,7 +68,7 @@ export default function ProblemSolutionSection() {
   }
 
   return (
-    <section className="bg-background lg:h-[100dvh - 65px] relative flex items-center overflow-x-hidden">
+    <section className="bg-background min-h-screen relative flex items-center overflow-x-hidden overflow-y-visible">
       <Button
         variant={"default"}
         size={"lg"}
@@ -252,14 +252,14 @@ export default function ProblemSolutionSection() {
 
       {/* Background Grid */}
       <div className="pointer-events-none absolute inset-0 opacity-5">
-        <motion.div
+        <div
           className="absolute inset-0"
           style={{
             backgroundImage: `
-            linear-gradient(to right, currentColor 1px, transparent 1px),
-            linear-gradient(to bottom, currentColor 1px, transparent 1px)
-          `,
-            backgroundSize: "40px 40px",
+              linear-gradient(to right, currentColor 1px, transparent 1px),
+              linear-gradient(to bottom, currentColor 1px, transparent 1px)
+            `,
+            backgroundSize: "60px 60px",
             color: "currentColor",
           }}
         />

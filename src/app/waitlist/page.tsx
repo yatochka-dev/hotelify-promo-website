@@ -74,7 +74,7 @@ export default function WaitlistSection() {
 
   return (
     <section className="bg-background relative flex items-center overflow-scroll py-10 sm:h-screen sm:py-0 md:overflow-hidden">
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-16 px-6 lg:grid-cols-2">
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-16 px-6 lg:grid-cols-2 lg:px-12">
         {/* Left Side - Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
