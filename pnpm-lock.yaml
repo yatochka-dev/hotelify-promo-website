@@ -29,6 +29,9 @@ importers:
       '@tanstack/react-form':
         specifier: ^1.14.1
         version: 1.14.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@vercel/functions':
+        specifier: ^2.2.6
+        version: 2.2.6
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -1439,6 +1442,19 @@ packages:
     resolution: {integrity: sha512-lrW200hZdbfRtztbygyaq/6jP6AKE8qQN2KvPcJ+x7wiD038YtnYtZ82IMNJ69GJibV7bwL3y9FgK+5w/pYt6g==}
     cpu: [x64]
     os: [win32]
+
+  '@vercel/functions@2.2.6':
+    resolution: {integrity: sha512-8XOcBYvXiDLSNlchIl/kMItLI1lrK0iBSc12uG87Tr5oKsFQf/rRHxmJWQOs0OiuzqD2ekDy9PcQLA3ZFOiDqg==}
+    engines: {node: '>= 18'}
+    peerDependencies:
+      '@aws-sdk/credential-provider-web-identity': '*'
+    peerDependenciesMeta:
+      '@aws-sdk/credential-provider-web-identity':
+        optional: true
+
+  '@vercel/oidc@2.0.0':
+    resolution: {integrity: sha512-U0hncpXof7gC9xtmSrjz6vrDqdwJXi8z/zSc9FyS80AoXKfCZtpkBz9gtL3x30Agmpxpwe35P1W2dP9Epa/RGA==}
+    engines: {node: '>= 18'}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -4171,6 +4187,12 @@ snapshots:
 
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
+
+  '@vercel/functions@2.2.6':
+    dependencies:
+      '@vercel/oidc': 2.0.0
+
+  '@vercel/oidc@2.0.0': {}
 
   acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:
