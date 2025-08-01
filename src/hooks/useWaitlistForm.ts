@@ -39,6 +39,7 @@ export function useWaitlistForm(
     },
     onSubmit: async ({ value, formApi }) => {
       setLoading(true);
+
       const error = await saveToWaitlist(value);
       setLoading(false);
       if (!error) {
