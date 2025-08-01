@@ -125,7 +125,7 @@ export default function FeaturesSection() {
               "text-foreground md:text-6x md:blockl mb-6 flex items-center justify-center gap-2 text-center text-3xl font-bold tracking-tight md:hidden"
             }
           >
-            Powerful Features that span Offers
+            Powerful Features that Keyvaro Offers
           </h1>
           <p className="text-foreground/70 mx-auto max-w-3xl text-lg font-light md:text-xl">
             Everything you need to create exceptional guest experiences while
